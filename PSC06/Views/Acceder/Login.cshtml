@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/views/shared/_LayoutApp.cshtml";
+}
+
+<div class="row">
+    <form id="frmAcceder">
+        <div class="col-lg-6, col-lg-offset-0">
+            <br />
+            <br />
+            <div>
+                Usuario
+                <input type="text" name="usuario" class="form-control" />
+                <br />
+                <div>
+                    Password
+                    <input type="password" name="password" class="form-control" />
+                </div>
+                <br />
+                <br />
+                <input type="submit" class="btn btn-success btn-lg" value="Acceder" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+    $("#frmAcceder").submit(function (e) {
+        e.preventDefault();
+        var url = "@Url.Content("~/Acceder/Enter")";
+        var parametros = {
+            usuario: $("input[name='usuario']").val(),
+            password: $("input[name='password']").val()
+        };
+
+        $.post(url, parametros, function (data) {
+            if (data == "1") {
+                document.location.href = "@Url.Content("~/")";
+            } else {
+                alert(data);
+            }
+        });
+    });
+});
+    </script>
+}
+
+
